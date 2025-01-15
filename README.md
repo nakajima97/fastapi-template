@@ -1,4 +1,4 @@
-# fatapi-template
+# fastapi-template
 ## Setup
 `docker compose up`
 
