@@ -6,7 +6,7 @@ from app.core.config import settings
 app = FastAPI(
     title=settings.APP_NAME,
     description=settings.APP_DESCRIPTION,
-    version=settings.APP_VERSION
+    version=settings.APP_VERSION,
 )
 
 
@@ -16,4 +16,4 @@ def read_root():
 
 
 # API v1のルーターを含める
-app.include_router(api_router, prefix="/api/v1") 
+app.include_router(api_router, prefix="/api/v1")

@@ -4,10 +4,10 @@ from sqlalchemy import text
 
 from app.core.config import settings
 from app.schemas.health import (
-    DatabaseHealthResponse, 
+    DatabaseHealthResponse,
     ApplicationHealthResponse,
-    HealthStatus, 
-    DatabaseStatus
+    HealthStatus,
+    DatabaseStatus,
 )
 
 
@@ -20,7 +20,7 @@ class HealthService:
     async def check_database_health(self) -> DatabaseHealthResponse:
         """
         データベースの健全性をチェック
-        
+
         Returns:
             DatabaseHealthResponse: ヘルスチェック結果
         """
@@ -30,19 +30,19 @@ class HealthService:
             return DatabaseHealthResponse(
                 status=HealthStatus.HEALTHY,
                 database=DatabaseStatus.CONNECTED,
-                message="Database connection is working"
+                message="Database connection is working",
             )
         except Exception as e:
             return DatabaseHealthResponse(
                 status=HealthStatus.UNHEALTHY,
                 database=DatabaseStatus.DISCONNECTED,
-                message=f"Database connection failed: {str(e)}"
+                message=f"Database connection failed: {str(e)}",
             )
 
     async def check_application_health(self) -> ApplicationHealthResponse:
         """
         アプリケーションの健全性をチェック（DB接続は確認しない）
-        
+
         Returns:
             ApplicationHealthResponse: アプリケーションヘルスチェック結果
         """
@@ -51,5 +51,5 @@ class HealthService:
             application=settings.APP_NAME,
             version=settings.APP_VERSION,
             timestamp=datetime.utcnow(),
-            message="Application is running successfully"
-        ) 
+            message="Application is running successfully",
+        )

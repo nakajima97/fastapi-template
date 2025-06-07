@@ -12,4 +12,4 @@ def get_health_service(db: Session = Depends(get_db)) -> HealthService:
 
 def get_app_health_service() -> HealthService:
     """アプリケーションヘルスチェック用HealthServiceの依存性注入（DBなし）"""
-    return HealthService() 
+    return HealthService()

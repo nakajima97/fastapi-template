@@ -5,7 +5,7 @@ from app.api.v1.router import api_router
 app = FastAPI(
     title="FastAPI Template",
     description="FastAPIのレイヤードアーキテクチャテンプレート",
-    version="0.1.0"
+    version="0.1.0",
 )
 
 
