@@ -1,3 +1,4 @@
+from datetime import datetime
 from enum import Enum
 from pydantic import BaseModel, Field
 
@@ -64,5 +65,46 @@ class DatabaseHealthErrorResponse(BaseModel):
                     "database": "disconnected",
                     "message": "Database connection failed: connection timeout"
                 }
+            }
+        }
+
+
+class ApplicationHealthResponse(BaseModel):
+    """アプリケーションヘルスチェックのレスポンスモデル"""
+    status: HealthStatus = Field(
+        ...,
+        description="アプリケーションのヘルスステータス",
+        example="healthy"
+    )
+    application: str = Field(
+        ...,
+        description="アプリケーション名",
+        example="FastAPI Template"
+    )
+    version: str = Field(
+        ...,
+        description="アプリケーションバージョン",
+        example="0.1.0"
+    )
+    timestamp: datetime = Field(
+        ...,
+        description="ヘルスチェック実行時刻",
+        example="2024-01-01T12:00:00.000Z"
+    )
+    message: str = Field(
+        ...,
+        description="ヘルスチェックメッセージ",
+        example="Application is running successfully"
+    )
+    
+    class Config:
+        """Pydanticの設定"""
+        schema_extra = {
+            "example": {
+                "status": "healthy",
+                "application": "FastAPI Template",
+                "version": "0.1.0",
+                "timestamp": "2024-01-01T12:00:00.000Z",
+                "message": "Application is running successfully"
             }
         } 

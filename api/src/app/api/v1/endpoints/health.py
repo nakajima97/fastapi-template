@@ -1,8 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from ...deps import get_health_service
+from ...deps import get_health_service, get_app_health_service
 from ....services.health_service import HealthService
-from ....schemas.health import DatabaseHealthResponse, DatabaseHealthErrorResponse, HealthStatus
+from ....schemas.health import (
+    DatabaseHealthResponse, 
+    DatabaseHealthErrorResponse, 
+    ApplicationHealthResponse,
+    HealthStatus
+)
 
 router = APIRouter()
 
@@ -34,4 +39,20 @@ async def health_check_database(
             detail=result.dict()
         )
     
-    return result 
+    return result
+
+
+@router.get(
+    "/health",
+    summary="Health Check Application",
+    description="アプリケーション単体の疎通確認用ヘルスチェックエンドポイント（データベース接続は確認しない）",
+    response_model=ApplicationHealthResponse
+)
+async def health_check_application(
+    health_service: HealthService = Depends(get_app_health_service)
+):
+    """
+    アプリケーション単体のヘルスチェック
+    データベース接続は確認せず、FastAPIアプリケーション自体の動作確認のみ
+    """
+    return await health_service.check_application_health() 

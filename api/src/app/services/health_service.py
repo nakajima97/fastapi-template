@@ -1,13 +1,19 @@
+from datetime import datetime
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 
-from ..schemas.health import DatabaseHealthResponse, HealthStatus, DatabaseStatus
+from ..schemas.health import (
+    DatabaseHealthResponse, 
+    ApplicationHealthResponse,
+    HealthStatus, 
+    DatabaseStatus
+)
 
 
 class HealthService:
     """ヘルスチェック関連のビジネスロジック"""
 
-    def __init__(self, db: Session):
+    def __init__(self, db: Session = None):
         self.db = db
 
     async def check_database_health(self) -> DatabaseHealthResponse:
@@ -30,4 +36,19 @@ class HealthService:
                 status=HealthStatus.UNHEALTHY,
                 database=DatabaseStatus.DISCONNECTED,
                 message=f"Database connection failed: {str(e)}"
-            ) 
+            )
+
+    async def check_application_health(self) -> ApplicationHealthResponse:
+        """
+        アプリケーションの健全性をチェック（DB接続は確認しない）
+        
+        Returns:
+            ApplicationHealthResponse: アプリケーションヘルスチェック結果
+        """
+        return ApplicationHealthResponse(
+            status=HealthStatus.HEALTHY,
+            application="FastAPI Template",
+            version="0.1.0",
+            timestamp=datetime.utcnow(),
+            message="Application is running successfully"
+        ) 
