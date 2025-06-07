@@ -2,7 +2,8 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 
-from ..schemas.health import (
+from app.core.config import settings
+from app.schemas.health import (
     DatabaseHealthResponse, 
     ApplicationHealthResponse,
     HealthStatus, 
@@ -47,8 +48,8 @@ class HealthService:
         """
         return ApplicationHealthResponse(
             status=HealthStatus.HEALTHY,
-            application="FastAPI Template",
-            version="0.1.0",
+            application=settings.APP_NAME,
+            version=settings.APP_VERSION,
             timestamp=datetime.utcnow(),
             message="Application is running successfully"
         ) 

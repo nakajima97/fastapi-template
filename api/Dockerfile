@@ -2,6 +2,9 @@ FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 
 WORKDIR /api
 
+# PYTHONPATHを設定して絶対インポートを可能にする
+ENV PYTHONPATH=/api/src
+
 CMD uv help
 
 RUN --mount=type=cache,target=/root/.cache/uv \

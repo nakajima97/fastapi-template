@@ -1,8 +1,8 @@
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
-from ..core.database import get_db
-from ..services.health_service import HealthService
+from app.core.database import get_db
+from app.services.health_service import HealthService
 
 
 def get_health_service(db: Session = Depends(get_db)) -> HealthService:

@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-DB_URL = "postgresql://user:password@postgres:5432/mydb"
+from .config import settings
 
-db_engine = create_engine(DB_URL, echo=True)
+db_engine = create_engine(settings.DATABASE_URL, echo=settings.DEBUG)
 db_session = sessionmaker(autocommit=False, autoflush=False, bind=db_engine)
 
 Base = declarative_base()

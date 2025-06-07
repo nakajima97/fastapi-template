@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from ...deps import get_health_service, get_app_health_service
-from ....services.health_service import HealthService
-from ....schemas.health import (
+from app.api.deps import get_health_service, get_app_health_service
+from app.services.health_service import HealthService
+from app.schemas.health import (
     DatabaseHealthResponse, 
     DatabaseHealthErrorResponse, 
     ApplicationHealthResponse,
