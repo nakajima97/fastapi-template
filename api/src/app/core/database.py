@@ -10,5 +10,6 @@ Base = declarative_base()
 
 
 def get_db():
+    """データベースセッションの依存性注入用関数"""
     with db_session() as session:
-        yield session
+        yield session 

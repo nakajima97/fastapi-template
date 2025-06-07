@@ -9,4 +9,4 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --frozen --no-install-project --no-dev
 
-CMD ["uv", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--reload"]
+CMD ["uv", "run", "uvicorn", "src.app.main:app", "--host", "0.0.0.0", "--reload"]
