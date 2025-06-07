@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, UTC
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 
@@ -50,6 +50,6 @@ class HealthService:
             status=HealthStatus.HEALTHY,
             application=settings.APP_NAME,
             version=settings.APP_VERSION,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             message="Application is running successfully",
         )
