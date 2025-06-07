@@ -15,10 +15,10 @@ jobs:
         with:
           python-version: 3.12.2
 
-      - name: Install poetry
+      - name: Install dependencies
         run: |
           pip install uv
-          uv sync --frozen --no-install-project --no-dev
+          uv sync --frozen --no-dev
 
       - name: Run API test
         run: |

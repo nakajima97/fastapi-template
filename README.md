@@ -11,6 +11,10 @@ check
 run  
 `docker compose exec api uv run ruff format`  
 
+## test
+run  
+`docker compose exec api uv run pytest`  
+
 ## migration
 create migration file  
 `docker compose exec api alembic revision --autogenerate -m "create initial table"`  
