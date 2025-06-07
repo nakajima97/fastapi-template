@@ -9,7 +9,7 @@ def test_dummy():
     assert response.status_code == 200
 
 
-def test_health_check_db():
+def test_health_check_database():
     response = client.get("/api/v1/health/db")
-    # DBが起動していない場合は503エラーが想定される
+    # データベースが起動していない場合は503エラーが想定される
     assert response.status_code in [200, 503]

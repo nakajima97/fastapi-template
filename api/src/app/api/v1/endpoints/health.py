@@ -6,13 +6,14 @@ from ....services.health_service import HealthService
 router = APIRouter()
 
 
-@router.get("/health/db")
-async def health_check_db(
+@router.get(
+    "/health/db",
+    summary="Health Check DB",
+    description="データベースへの疎通確認用ヘルスチェックエンドポイント"
+)
+async def health_check_database(
     health_service: HealthService = Depends(get_health_service)
 ):
-    """
-    データベースへの疎通確認用ヘルスチェックエンドポイント
-    """
     result = await health_service.check_database_health()
     
     if result["status"] == "unhealthy":
