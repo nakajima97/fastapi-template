@@ -40,4 +40,29 @@ class DatabaseHealthResponse(BaseModel):
                 "database": "connected",
                 "message": "Database connection is working"
             }
+        }
+
+
+class DatabaseHealthErrorResponse(BaseModel):
+    """データベースヘルスチェックエラー時のレスポンスモデル (HTTPException用)"""
+    detail: dict = Field(
+        ...,
+        description="エラーの詳細情報",
+        example={
+            "status": "unhealthy",
+            "database": "disconnected",
+            "message": "Database connection failed: connection timeout"
+        }
+    )
+    
+    class Config:
+        """Pydanticの設定"""
+        schema_extra = {
+            "example": {
+                "detail": {
+                    "status": "unhealthy",
+                    "database": "disconnected",
+                    "message": "Database connection failed: connection timeout"
+                }
+            }
         } 

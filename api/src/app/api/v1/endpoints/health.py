@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from ...deps import get_health_service
 from ....services.health_service import HealthService
-from ....schemas.health import DatabaseHealthResponse, HealthStatus
+from ....schemas.health import DatabaseHealthResponse, DatabaseHealthErrorResponse, HealthStatus
 
 router = APIRouter()
 
@@ -11,7 +11,17 @@ router = APIRouter()
     "/health/db",
     summary="Health Check DB",
     description="データベースへの疎通確認用ヘルスチェックエンドポイント",
-    response_model=DatabaseHealthResponse
+    response_model=DatabaseHealthResponse,
+    responses={
+        200: {
+            "description": "データベース接続が正常",
+            "model": DatabaseHealthResponse
+        },
+        503: {
+            "description": "データベース接続に失敗",
+            "model": DatabaseHealthErrorResponse
+        }
+    }
 )
 async def health_check_database(
     health_service: HealthService = Depends(get_health_service)
