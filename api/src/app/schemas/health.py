@@ -19,6 +19,7 @@ class DatabaseStatus(str, Enum):
 
 class DatabaseHealthResponse(BaseModel):
     """データベースヘルスチェックのレスポンスモデル"""
+
     model_config = ConfigDict(
         json_schema_extra={
             "example": {
@@ -29,12 +30,8 @@ class DatabaseHealthResponse(BaseModel):
         }
     )
 
-    status: HealthStatus = Field(
-        ..., description="ヘルスチェックの結果ステータス"
-    )
-    database: DatabaseStatus = Field(
-        ..., description="データベース接続の状態"
-    )
+    status: HealthStatus = Field(..., description="ヘルスチェックの結果ステータス")
+    database: DatabaseStatus = Field(..., description="データベース接続の状態")
     message: str = Field(
         ...,
         description="ヘルスチェックの詳細メッセージ",
@@ -43,6 +40,7 @@ class DatabaseHealthResponse(BaseModel):
 
 class DatabaseHealthErrorResponse(BaseModel):
     """データベースヘルスチェックエラー時のレスポンスモデル (HTTPException用)"""
+
     model_config = ConfigDict(
         json_schema_extra={
             "example": {
@@ -63,6 +61,7 @@ class DatabaseHealthErrorResponse(BaseModel):
 
 class ApplicationHealthResponse(BaseModel):
     """アプリケーションヘルスチェックのレスポンスモデル"""
+
     model_config = ConfigDict(
         json_schema_extra={
             "example": {
@@ -75,16 +74,10 @@ class ApplicationHealthResponse(BaseModel):
         }
     )
 
-    status: HealthStatus = Field(
-        ..., description="アプリケーションのヘルスステータス"
-    )
-    application: str = Field(
-        ..., description="アプリケーション名"
-    )
+    status: HealthStatus = Field(..., description="アプリケーションのヘルスステータス")
+    application: str = Field(..., description="アプリケーション名")
     version: str = Field(..., description="アプリケーションバージョン")
-    timestamp: datetime = Field(
-        ..., description="ヘルスチェック実行時刻"
-    )
+    timestamp: datetime = Field(..., description="ヘルスチェック実行時刻")
     message: str = Field(
         ...,
         description="ヘルスチェックメッセージ",
