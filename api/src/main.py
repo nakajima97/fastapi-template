@@ -22,7 +22,7 @@ def health_check_db(db: Session = Depends(get_db)):
         return {
             "status": "healthy",
             "database": "connected",
-            "message": "Database connection is working"
+            "message": "Database connection is working",
         }
     except Exception as e:
         raise HTTPException(
@@ -30,6 +30,6 @@ def health_check_db(db: Session = Depends(get_db)):
             detail={
                 "status": "unhealthy",
                 "database": "disconnected",
-                "message": f"Database connection failed: {str(e)}"
-            }
+                "message": f"Database connection failed: {str(e)}",
+            },
         )
